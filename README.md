@@ -31,6 +31,9 @@ This system designed  for **frontend UI rendering using Django templates** to be
 - **Password Hashing**
   - Using **bcrypt** for secure password storage
 
+  **Rate Limiting**
+  - Using Ratelimit from **django-ratelimiter** which protects against brute force attacks.
+
 - **Role-Based Access Control (RBAC)**
   - Roles: `admin`, `customer`
   - Permissions based on role for sensitive endpoints
@@ -39,7 +42,7 @@ This system designed  for **frontend UI rendering using Django templates** to be
   - Validation of user inputs (emailid, phonenumber, password strength/weak)
   - Protection against SQL injection/XSS attacks
 
-  - **JWT-based Authentication**[optional]
+  - **JWT-based Authentication**
   - Access and refresh tokens
   - Token expiration handling
 
@@ -50,30 +53,6 @@ This system designed  for **frontend UI rendering using Django templates** to be
   - Test API endpoints and workflows (registration, document upload, token generation)
 - **Test Coverage**
   - Generate coverage reports using `pytest` and `pytest-cov`
-
----
-
-## Architecture / Projectstructure
-smartbankingsystem/
-│
-├── users/
-│ ├── models.py 
-│ ├── forms.py 
-│ ├── views.py
-│ ├── urls.py
-| ├── templates/
-│ └── tests/ 
-├── smartbanking/
-│ ├── settings.py
-│ ├── urls.py
-│ └── wsgi.py
-│
-├── requirements.txt
-├── manage.py
-└── README.md
-
----
-
 
 ---
 
@@ -122,6 +101,9 @@ smartbankingsystem/
 - Validate email, phone, and document types
 - Sanitize inputs to prevent XSS/SQL injection
 
+### 5.rate limiting
+ - Protects important endpoints against bruteforce attack from repetetive access.
+
 ---
 
 ## Dependencies
@@ -134,19 +116,19 @@ smartbankingsystem/
 
 ## running the project
 
-# Install all dependencies
+## Install all dependencies
 - pip install -r requirements.txt
 
-# Activate virtual environment
+## Activate virtual environment
 - venv\Source\activate
 
-# Apply migrations
+## Apply migrations
 - python manage.py migrate
 
-# Run development server
+## Run development server
 - python manage.py runserver
 
- # Run test coverage
+## Run test coverage
  - coverage run --source='users' manage.py test users
  - coverage report -m
  - coverage html

@@ -40,8 +40,8 @@ def login_view(request):
                 username = form.cleaned_data['username']
                 password = form.cleaned_data['password'].encode()
                 try:
-                    user = authenticate(username=username, password=password)
-                    if user is not None:
+                    user = User.objects.get(username=username)
+                    if bcrypt.checkpw(password, user.password.encode()):
                         auth_login(request, user)
                         return redirect('kyc_submit')
                     else:
