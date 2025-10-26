@@ -26,6 +26,10 @@ This system designed  for **frontend UI rendering using Django templates** to be
     - Automatic system validation for document format and required fields
     - Status tracking: Pending, Approved, Rejected
 
+- **Admin Dashboard**
+    - To monitor the user accounts and their profile
+    - To review the kyc document and update the status by approv/reject.
+
 ### **Security Features**
 
 - **Password Hashing**

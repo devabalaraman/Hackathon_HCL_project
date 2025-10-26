@@ -1,7 +1,7 @@
 from ratelimit.decorators import RateLimitDecorator
 import bcrypt
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,  redirect,get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
@@ -92,11 +92,23 @@ def list_all_users(request):
     return render(request, 'users/admin_users.html', {'users': users})
 
 # Get all KYC submissions with username and status
-@RateLimitDecorator(calls=5, period=60, raise_on_limit=True)
 @login_required(login_url='login')
 def list_all_kyc_submissions(request):
     if request.user.role != 'admin':
         return JsonResponse({'error': 'Permission denied. Admins only.'}, status=403)
 
+    if request.method == "POST":
+        kyc_id = request.POST.get('kyc_id')
+        action = request.POST.get('action')  # 'approve' or 'reject'
+        kyc_obj = get_object_or_404(KYC, id=kyc_id)
+        if action == 'approve':
+            kyc_obj.status = 'approved'
+        elif action == 'reject':
+            kyc_obj.status = 'rejected'
+        kyc_obj.save()
+        messages.success(request, f"KYC status updated for {kyc_obj.user.username}")
+
+        return redirect('admin_verify') 
+    
     kyc_list = KYC.objects.select_related('user').all()
-    return render(request, 'users/admin_kyc.html', {'kyc_list': kyc_list})
+    return render(request, 'users/admin_kyc.html', {'kycs': kyc_list})
