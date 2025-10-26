@@ -84,7 +84,7 @@ This system designed  for **frontend UI rendering using Django templates** to be
 
 ## Security Implementation
 
-### 1. JWT Authentication
+### 1. Session-based & JWT Authentication
 - Use `djangorestframework-simplejwt` for access/refresh tokens
 - Protect sensitive endpoints with JWT verification
 
@@ -132,3 +132,25 @@ This system designed  for **frontend UI rendering using Django templates** to be
  - coverage run --source='users' manage.py test users
  - coverage report -m
  - coverage html
+
+## Conclusion
+
+This Smart Banking System provides a secure and modular backend for user registration, login, and KYC submission. It includes:
+
+- Role-based access for customers and admins
+- Input validation and sanitization
+- Rate limiting to prevent abuse
+- Session-based & JWT-based authentication (stateless)
+- Unit and integration tests for code coverage
+
+The system demonstrates a robust foundation for building more complex banking features in the future.
+
+## Future Enhancements
+
+Potential improvements for the system include:
+
+- Integration with real banking APIs for transactions
+- Multi-factor authentication (MFA) for stronger security
+- Improved KYC verification workflow with admin notifications
+- Detailed audit logs for all user activities
+- Automated deployment and CI/CD pipelines
