@@ -3,7 +3,6 @@ from django import forms
 from .models import User, KYC
 from django.contrib.auth.forms import UserCreationForm
 import re
-import bcrypt
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
