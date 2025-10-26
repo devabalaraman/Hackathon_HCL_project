@@ -101,7 +101,7 @@ This system designed  for **frontend UI rendering using Django templates** to be
 - Validate email, phone, and document types
 - Sanitize inputs to prevent XSS/SQL injection
 
-### 5.rate limiting
+### 5. Rate limiting
  - Protects important endpoints against bruteforce attack from repetetive access.
 
 ---
@@ -114,7 +114,7 @@ This system designed  for **frontend UI rendering using Django templates** to be
 - django-ratelimit
 - pytest-django, coverage
 
-## running the project
+## Running the project
 
 ## Install all dependencies
 - pip install -r requirements.txt

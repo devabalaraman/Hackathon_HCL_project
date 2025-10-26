@@ -58,6 +58,7 @@ def logout_view(request):
     return redirect('login')
 
 # KYC Submission
+@RateLimitDecorator(calls=5, period=60, raise_on_limit=True)
 @login_required(login_url='login')
 def kyc_submit(request):
     
@@ -91,6 +92,7 @@ def list_all_users(request):
     return render(request, 'users/admin_users.html', {'users': users})
 
 # Get all KYC submissions with username and status
+@RateLimitDecorator(calls=5, period=60, raise_on_limit=True)
 @login_required(login_url='login')
 def list_all_kyc_submissions(request):
     if request.user.role != 'admin':
