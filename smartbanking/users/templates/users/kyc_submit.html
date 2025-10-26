@@ -1,0 +1,10 @@
+<h2>KYC Submission</h2>
+{% if submitted %}
+<p>You have already submitted KYC.</p>
+{% endif %}
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Submit</button>
+</form>
+<a href="{% url 'logout' %}">Logout</a>

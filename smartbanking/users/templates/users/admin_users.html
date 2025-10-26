@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Users</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f9f9f9; }
+        h2 { text-align: center; color: #333; margin-top: 20px; }
+        table { width: 80%; margin: 20px auto; border-collapse: collapse; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1);}
+        th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
+        th { background: #2196F3; color: #fff; }
+        tr:nth-child(even) { background: #f2f2f2; }
+        a { color: #2196F3; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        p { text-align: center; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h2>All Users</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4">No users found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>
+        <a href="{% url 'admin_verify' %}">View All KYC Submissions</a> | 
+        <a href="{% url 'logout' %}">Logout</a>
+    </p>
+</body>
+</html>

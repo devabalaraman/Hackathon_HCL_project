@@ -1,0 +1,59 @@
+<h2>All KYC Submissions</h2>
+
+<table border="1" cellspacing="0" cellpadding="5">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Status</th>
+            <th>Document</th>
+            <th>Uploaded At</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for kyc in kyc_list %}
+        <tr>
+            <td>{{ kyc.id }}</td>
+            <td>{{ kyc.user.username }}</td>
+            <td>{{ kyc.status }}</td>
+            <td>
+                {% if kyc.document %}
+                    <a href="#" onclick="openModal('{{ kyc.document.url }}'); return false;">View</a>
+                {% else %}
+                    No document
+                {% endif %}
+            </td>
+            <td>{{ kyc.submitted_at|date:"Y-m-d H:i" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No KYC submissions found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Modal for viewing image -->
+<div id="docModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+     background-color: rgba(0,0,0,0.8); justify-content:center; align-items:center;">
+    <span style="position:absolute; top:10px; right:20px; font-size:30px; color:white; cursor:pointer;" onclick="closeModal()">×</span>
+    <img id="docImg" src="" style="max-width:80%; max-height:80%; border:2px solid white;" />
+</div>
+
+<!-- Navigation links -->
+<p>
+    <a href="{% url 'view_all_users' %}">View All Users</a> |
+    <a href="{% url 'logout' %}">Logout</a>
+</p>
+
+<script>
+function openModal(url) {
+    document.getElementById('docImg').src = url;
+    document.getElementById('docModal').style.display = 'flex';
+}
+
+function closeModal() {
+    document.getElementById('docImg').src = '';
+    document.getElementById('docModal').style.display = 'none';
+}
+</script>
